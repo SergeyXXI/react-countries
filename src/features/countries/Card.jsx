@@ -11,7 +11,7 @@ const CardContainer = styled.div`
 
 const CountryLink = styled(Link).attrs(props => (
 {
-    to: `countries/${props.title}`
+    to: `${props.title}`
 }))`
     display: block;
     height: 190px;    

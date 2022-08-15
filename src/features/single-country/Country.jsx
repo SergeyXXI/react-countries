@@ -288,7 +288,7 @@ export default function Country({ name })
                         {
                             nearby.map(name =>
                                 <BCItem
-                                    onClick={() => navigate(`/countries/${name}`)} 
+                                    onClick={() => navigate(`/react-countries/${name}`)} 
                                     key={name}
                                 >{name}</BCItem>
                             )
