@@ -24,7 +24,7 @@ const HeaderContent = styled.div`
     margin: 0 auto;
 `;
 
-const HeaderLink = styled(Link).attrs({ to: "/" })`
+const HeaderLink = styled(Link).attrs({ to: "/react-countries" })`
     font-size: 1.2rem;
     font-weight: 800;
     text-decoration: none;
@@ -46,4 +46,3 @@ export default function Header()
         </HeaderEl>
     );
 }
-
