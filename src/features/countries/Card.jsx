@@ -14,7 +14,7 @@ const CountryLink = styled(Link).attrs(props => (
     to: `countries/${props.title}`
 }))`
     display: block;
-    height: 170px;    
+    height: 190px;    
 `;
 
 const FlagImg = styled.img.attrs(props => (
