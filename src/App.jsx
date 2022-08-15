@@ -22,7 +22,7 @@ export default function App()
                 <Container>                    
                     <Routes>
                         <Route path="/react-countries" element={<HomePage />} />
-                        <Route path="/react-countries/countries/:name" element={<Country />} /> 
+                        <Route path="/react-countries/:name" element={<Country />} /> 
                         <Route path="*" element={<NotFound />} />                       
                     </Routes>                                      
                 </Container>
@@ -33,5 +33,5 @@ export default function App()
 
 /*
 <Route path="/" element={<HomePage />} />
-<Route path="/countries/:name" element={<Country />} /> 
+<Route path="/:name" element={<Country />} /> 
 */
