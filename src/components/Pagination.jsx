@@ -20,7 +20,7 @@ const Item = styled.li`
         width: 2.25rem;
         height: 2.25rem; 
         justify-content: center;        
-        align-items: center;        
+        align-items: center;         
     }  
 
     ${({ isCurrent, noLink }) => isCurrent ?
@@ -34,7 +34,7 @@ const Item = styled.li`
                 box-shadow: var(--shadow);
             }           
         ` :
-        noLink ? "padding: .25rem;" : ""
+        noLink ? "padding: .25rem; opacity: .4;" : ""
     }   
 `;
 
