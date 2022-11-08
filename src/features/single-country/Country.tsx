@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useNearby } from "./useNearby";
 
+type CountryProps = 
+{
+    name: string
+};
+
 const Content = styled.div`
     display: flex;
     flex-direction: column;    
@@ -212,7 +217,8 @@ const BCItem = styled.li`
     box-shadow: var(--shadow);    
 `;
 
-export default function Country({ name })
+
+export default function Country({ name = "" }: CountryProps)
 {
     const { country, status, error } = useSingleCountry(name);
     const navigate = useNavigate(); 
@@ -232,14 +238,14 @@ export default function Country({ name })
         country?.languages[key] || "no data").join(", ");
     const borders = country?.borders; 
 
-    const nearby = useNearby(borders);   
+    const nearby = useNearby(borders);     
 
     return (
         <>
-        { status === "rejected" && `Error: ${error}. Please, reload page`}         
+        { status === "rejected" && `Error: ${error}. No such country`}         
         { status === "loading" && "Loading..."}
         { 
-            status === "received" &&
+            status === "received" && country &&
             <Content>
                 <CountryFlag src={imgSrc} alt={name} />
                 <CountryInfo>
@@ -283,17 +289,21 @@ export default function Country({ name })
                         </List>                    
                     </ListsContainer>
                     <BCContainer>
-                        <BCTitle>Border Countries:</BCTitle>                            
-                        <BCList>
+                        <BCTitle>Border Countries:</BCTitle>
                         {
-                            nearby.map(name =>
-                                <BCItem
-                                    onClick={() => navigate(`/react-countries/${name}`)} 
-                                    key={name}
-                                >{name}</BCItem>
-                            )
-                        }                                
-                        </BCList>
+                            nearby.length ?
+                                <BCList>
+                                {
+                                    nearby.map(name =>
+                                        <BCItem
+                                            onClick={() => navigate(`/react-countries/${name}`)} 
+                                            key={name}
+                                        >{name}</BCItem>
+                                    )
+                                }                                
+                                </BCList> : 
+                            !borders && "None"
+                        }                      
                     </BCContainer>
                 </CountryInfo>                
             </Content>

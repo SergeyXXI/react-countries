@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import HomePage from "./pages/HomePage";
-import Country from "./pages/CountryPage";
-import NotFound from "./pages/NotFound";
+import Header from "components/Header";
+import HomePage from "pages/HomePage";
+import Country from "pages/CountryPage";
+import NotFound from "pages/NotFound";
 
 const Main = styled.main``;
 

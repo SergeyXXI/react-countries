@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import Country from "../features/single-country/Country";
+import Country from "features/single-country/Country";
 
 const Button = styled.button`
     display: flex;    
@@ -30,9 +30,10 @@ const Icon = styled(IoIosArrowRoundBack).attrs(
 `;
 
 export default function CountryPage()
-{
+{   
+
     const navigate = useNavigate(); 
-    const { name } = useParams();
+    const { name = "" } = useParams();
 
     return (
         <>

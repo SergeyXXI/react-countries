@@ -1,14 +1,29 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { TCountry } from 'types';
+import { Extra, Status } from 'types';
 import { sortCountries } from '../../helpers';
 
-const initialState = 
+type initialStateSlice =
 {
-    status: "idle", //loading | received | rejected
+    status: Status,
+    list: TCountry[],
+    error: string | null
+};
+
+const initialState: initialStateSlice = 
+{
+    status: "idle",
     list: [],    
     error: null    
 };
 
-const loadCountries = createAsyncThunk("countries/loadAll",
+const loadCountries = createAsyncThunk<
+    TCountry[],
+    undefined,
+    {
+        extra: Extra
+    }
+>("countries/loadAll",
     async (_, { extra: { client, api } }) =>
     {
         const { data } = await client.get(api.countriesData);
@@ -38,33 +53,12 @@ const countriesSlice = createSlice(
             .addCase(loadCountries.rejected, (state, action) => 
                 {                    
                     state.status = "rejected";
-                    state.error = action.error.message;
+                    state.error = action.error.message || "Unknown error :(";
                 });   
     }        
                 
 });
 
-const countriesReducer = countriesSlice.reducer;
+const countriesReducer = countriesSlice.reducer;  
 
-const selectCountriesInfo = state => (
-{
-    status: state.countries.status,
-    error: state.countries.error,
-    qty: state.countries.list.length
-});
-    
-const selectCountries = state => state.countries.list;
-    
-const selectSpecifiedCountries = (state, { searchStr, region }) =>
-{
-    return state.countries.list.filter(country =>        
-            country.name.common.toLowerCase().includes(searchStr.toLowerCase()) &&
-            country.region.toLowerCase().includes(region.toLowerCase())        
-    );   
-};    
-
-export { 
-    countriesReducer, 
-    loadCountries,   
-    selectCountriesInfo, selectCountries,selectSpecifiedCountries 
-};
+export { countriesReducer, loadCountries };

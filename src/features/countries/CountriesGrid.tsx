@@ -35,7 +35,8 @@ export default function CountriesGrid()
             { 
                 status === "received" && countries.length ?                    
                     countries.map(item => <Card key={item.name.official} {...item} />) :
-                    status === "received" && "Countries not found."                
+                    
+                status === "received" && "Countries not found."                
             }                  
             </Grid>
             {

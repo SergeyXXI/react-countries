@@ -1,5 +1,25 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
+type PaginationProps = 
+{
+    num: number,
+    current: number
+};
+
+type PaginationItemProps = 
+{
+    isCurrent?: boolean,
+    noLink?: boolean
+};
+
+type addItemOptions =
+{
+    isCurrent?: boolean,
+    isLink?: boolean,
+    key?: string    
+};
 
 const List = styled.ul`
     display: flex;
@@ -11,7 +31,7 @@ const List = styled.ul`
     margin: 1.5rem 0 1rem;
 `;
 
-const Item = styled.li`
+const Item = styled.li<PaginationItemProps>`
     display: flex;
     
     & > span
@@ -49,7 +69,7 @@ const PageLink = styled(Link)`
     padding: .25rem; 
 `;
 
-export default function Pagination({ num, current })
+export default function Pagination({ num, current }: PaginationProps)
 {
     const items = formPages(num, current);    
 
@@ -57,16 +77,15 @@ export default function Pagination({ num, current })
         <List>{items}</List>
     );
 }
-
-function formPages(num, currentPage)
+function formPages(num: number, currentPage: number)
 {
     if(num <= 1 || !currentPage) return [];
 
-    const result = [];
+    const result: ReactNode[] = [];
     let isCollapsed = false;
     let isCollapsedTwo = false;
 
-    const addItem = (page, options = {}) =>
+    const addItem = (value: number | string, options: addItemOptions = {}) =>
     {         
         const {
             isCurrent = false,          
@@ -76,13 +95,13 @@ function formPages(num, currentPage)
 
         result.push(
             isLink ?                
-                <Item key={page+key}>
-                    <PageLink to={page === 1 ? "/react-countries" : `?page=${page}`}>
-                        {page}
+                <Item key={value+key}>
+                    <PageLink to={value === 1 ? "/react-countries" : `?page=${value}`}>
+                        {value}
                     </PageLink>
                 </Item> :
-                <Item key={page+key} isCurrent={isCurrent} noLink>
-                    <span>{page}</span>
+                <Item key={value+key} isCurrent={isCurrent} noLink>
+                    <span>{value}</span>
                 </Item>
         );
     };    

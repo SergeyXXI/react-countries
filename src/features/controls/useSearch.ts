@@ -1,16 +1,20 @@
 import { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "store";
 import { useNavigate, useLocation } from "react-router-dom"
-import { selectSearchStr, setSearch } from "./controls-slice";
+import { setSearch } from "./controls-slice";
 import throttle from "lodash.throttle";
+import { selectSearchStr } from "./controls-selectors";
 
-export const useSearch = () =>
+type SearchHook = [string, React.ChangeEventHandler<HTMLInputElement>];
+
+export const useSearch = (): SearchHook =>
 {
     const location = useLocation();
     const navigate = useNavigate();
     const initValue = useSelector(selectSearchStr);
     const [value, setLocalValue] = useState(initValue);
-    const dispatch = useDispatch();  
+    const dispatch = useAppDispatch();  
 
     const setThrottledSearch = useCallback(
         throttle((val, urlParam) =>
@@ -20,7 +24,7 @@ export const useSearch = () =>
         }, 300),        
     []);
 
-    const handleInput = e =>
+    const handleInput: React.ChangeEventHandler<HTMLInputElement> = e =>
     {
         setLocalValue(e.target.value);
         setThrottledSearch(e.target.value, location.search);

@@ -1,7 +1,15 @@
 import Select from "react-select";
+import { StylesConfig } from "react-select";
 import { useRegion } from "./useRegion";
+import { Region } from "types";
 
-const options = 
+export type Option = 
+{
+    value: Region,
+    label: Region
+};
+
+const options: Option[] = 
 [
     { value: "Africa", label: "Africa" },
     { value: "Americas", label: "Americas" },
@@ -10,7 +18,7 @@ const options =
     { value: "Oceania", label: "Oceania" }    
 ];
 
-const styles = 
+const styles: StylesConfig<Option, false> = 
 {
     container: provided => (
     {
@@ -18,7 +26,7 @@ const styles =
         width: "190px",
         height: "49.33px",        
         borderRadius: ".5rem",
-        boxShadow: "var(--shadow)" //dynamic      
+        boxShadow: "var(--shadow)"     
             
     }),
     control: (provided, {isFocused}) => (

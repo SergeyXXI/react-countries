@@ -1,3 +1,4 @@
+import { TCountry } from "types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -37,12 +38,12 @@ const CountryTitle = styled.h3`
     margin: 0 0 1.5rem 0;
 `;
 
-const CountryDataPart = styled.p`    
+const CountryDataPart = styled.p<{ marB?: string }>`    
     margin-top: 0;  
     margin-bottom: ${({ marB }) => marB || "0"}; 
 `;
 
-export default function Card(props)
+export default function Card(props: TCountry)
 {
     const capital = props.capital[0];    
     const 

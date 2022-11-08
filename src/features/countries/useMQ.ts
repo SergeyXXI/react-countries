@@ -10,8 +10,8 @@ export const useMQ = () =>
     {
         mq.onchange = e => setPerPage(e.matches ? 12 : 24);                   
 
-        return () => mq.onchange = null;
+        return () => void (mq.onchange = null);
     }, []);
 
     return perPage;
-}
+};

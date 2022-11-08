@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { clearControls } from "../features/controls/controls-slice";
-import ThemeSwitcher from "../features/theme/ThemeSwitcher";
+import { clearControls } from "features/controls/controls-slice";
+import ThemeSwitcher from "features/theme/ThemeSwitcher";
 
 const HeaderEl = styled.header`
     background: var(--color-ui);

@@ -1,14 +1,29 @@
+import { Status, Extra, TCountry } from 'types';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const initialState = 
+type InitialStateSlice = 
 {
-    status: "idle", //loading | received | rejected
+    status: Status,    
+    current: TCountry | null,
+    nearby: string[],
+    error: string | null
+};
+
+const initialState: InitialStateSlice = 
+{
+    status: "idle",    
     current: null,
     nearby: [],    
     error: null    
 };
 
-const loadCountryByName = createAsyncThunk("single-country/loadSinglECountry",
+const loadCountryByName = createAsyncThunk<
+    TCountry,
+    string,
+    {
+        extra: Extra
+    }
+>("single-country/loadSingleCountry",
     async (name, { extra: { client, api } }) =>
     {
         const { data } = await client.get(api.searchByName(name));
@@ -16,12 +31,18 @@ const loadCountryByName = createAsyncThunk("single-country/loadSinglECountry",
         return data[0];       
     }
 );
-const loadNearbyCountries = createAsyncThunk("single-country/loadNearby",
+const loadNearbyCountries = createAsyncThunk<
+    string[],
+    string[],
+    {
+        extra: Extra
+    }
+>("single-country/loadNearby",
     async (borders, { extra: { client, api } }) =>
     {
         const { data } = await client.get(api.searchByCode(borders));
         
-        return data.map(item => item.name.common);       
+        return data.map((item: TCountry) => item.name.common);       
     }
 );
 
@@ -37,25 +58,24 @@ const singleCountrySlice = createSlice(
     {
         builder
             .addCase(loadCountryByName.fulfilled, (state, action) =>            
-                {
-                    state.status = "received";
-                    state.current = action.payload;
-                })
+            {
+                state.status = "received";
+                state.current = action.payload;
+            })
             .addCase(loadCountryByName.pending, state =>            
-                {
-                    state.status = "loading";
-                    state.error = null;
-                })
+            {
+                state.status = "loading";
+                state.error = null;
+            })
             .addCase(loadCountryByName.rejected, (state, action) => 
-                {                    
-                    state.status = "rejected";
-                    state.error = action.error.message;
-                })
+            {                    
+                state.status = "rejected";
+                state.error = action.error.message || "Unknown error :(";
+            })
             .addCase(loadNearbyCountries.fulfilled, (state, action) =>            
-                {
-                    state.status = "received";
-                    state.nearby = action.payload;
-                });   
+            {                
+                state.nearby = action.payload;
+            });             
     }        
                 
 });
@@ -63,17 +83,8 @@ const singleCountrySlice = createSlice(
 const singleCountryReducer = singleCountrySlice.reducer; 
 const { clearSingle } = singleCountrySlice.actions;  
 
-const selectSingleCountry = state => (
-{
-    country: state.singleCountry.current,
-    nearby: state.singleCountry.nearby,
-    status: state.singleCountry.status,
-    error: state.singleCountry.error    
-});   
-
 export { 
     singleCountryReducer, 
     loadCountryByName, loadNearbyCountries,
-    clearSingle,   
-    selectSingleCountry 
+    clearSingle    
 };

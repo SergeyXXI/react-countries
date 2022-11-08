@@ -1,8 +1,9 @@
+import { TCountry } from "types";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useMQ } from "./useMQ";
 
-export const usePagination = countriesAll =>
+export const usePagination = (countriesAll: TCountry[]) =>
 {
     const PER_PAGE = useMQ();
     const location = useLocation();  

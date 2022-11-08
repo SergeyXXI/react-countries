@@ -1,4 +1,6 @@
-function sortCountries(countries)
+import { TCountry } from "types";
+
+function sortCountries(countries: TCountry[])
 { 
     if(!countries) return [];
     
@@ -14,7 +16,7 @@ function sortCountries(countries)
     return countries;
 }
 
-function getStrByDigit(num, digit = 3)
+function getStrByDigit(num: number, digit = 3)
 {
     const str = String(num);       
 
