@@ -1,8 +1,9 @@
 # World Countries
-### https://sergeyxxi.github.io/react-countries/
+### https://ts-react-countries-sergeyxxi.vercel.app
 
 ## Core Tech Stack
-- ReactJs
+- TypeScript
+- ReactJS
 - Redux Toolkit
 - Redux Persist
 - React Router DOM
