@@ -25,7 +25,7 @@ export default function CountriesGrid()
     
     if(!currentPage || currentPage < 0 ||
         (pagesNum > 1 && currentPage > pagesNum))
-            return <Navigate to={"/react-countries"} replace={true} />;      
+            return <Navigate to={"/"} replace={true} />;      
 
     return (
         <>

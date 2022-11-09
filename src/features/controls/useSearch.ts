@@ -20,7 +20,7 @@ export const useSearch = (): SearchHook =>
         throttle((val, urlParam) =>
         {
             dispatch(setSearch(val));            
-            if(urlParam) navigate("/react-countries");
+            if(urlParam) navigate("/");
         }, 300),        
     []);
 

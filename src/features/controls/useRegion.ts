@@ -17,7 +17,7 @@ export const useRegion = (): [Region | "", (item: Option | null) => void] =>
     {
         dispatch(setRegion(item?.value ?? ""));        
 
-        if(location.search) navigate("/react-countries");            
+        if(location.search) navigate("/");            
     }   
 
     return [regionStr, handleSelect];

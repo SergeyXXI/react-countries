@@ -1,6 +1,5 @@
 {
-  "name": "ts-react-countries-app", 
-  "homepage": "/react-countries", 
+  "name": "ts-react-countries-app",  
   "version": "0.1.0",
   "private": true,
   "dependencies": {

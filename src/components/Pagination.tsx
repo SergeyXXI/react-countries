@@ -96,7 +96,7 @@ function formPages(num: number, currentPage: number)
         result.push(
             isLink ?                
                 <Item key={value+key}>
-                    <PageLink to={value === 1 ? "/react-countries" : `?page=${value}`}>
+                    <PageLink to={value === 1 ? "/" : `?page=${value}`}>
                         {value}
                     </PageLink>
                 </Item> :
