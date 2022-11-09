@@ -1,6 +1,6 @@
 {
   "name": "ts-react-countries-app",
-  "homepage": "https://sergeyxxi.github.io/react-countries",
+  "homepage": "https://ts-react-countries-sergeyxxi.vercel.app/react-countries",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
